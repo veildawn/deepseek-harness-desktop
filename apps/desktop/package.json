@@ -1,0 +1,103 @@
+{
+  "name": "@deepseek-ai/dsh-desktop",
+  "description": "Electron desktop host for the DeepSeek Harness Web application",
+  "version": "0.1.0-rc.6",
+  "private": true,
+  "type": "module",
+  "main": "src/main.mjs",
+  "author": "veildawn",
+  "homepage": "https://github.com/veildawn/deeseek-gui",
+  "repository": "github:veildawn/deeseek-gui",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.mjs",
+    "clean:dist": "node scripts/clean-dist.mjs",
+    "stage:harness": "node scripts/stage-harness.mjs",
+    "pack:mac": "pnpm run clean:dist && pnpm run stage:harness && electron-builder --mac dir --arm64",
+    "dist:mac": "pnpm run clean:dist && pnpm run stage:harness && electron-builder --mac dmg zip --arm64 --publish never",
+    "dist:win": "pnpm run clean:dist && pnpm run stage:harness && electron-builder --win nsis --x64 --publish never"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "4.2.0",
+    "electron": "43.4.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.veildawn.deepseek-harness",
+    "productName": "DeepSeek Harness",
+    "artifactName": "DeepSeek-Harness-${version}-${os}-${arch}.${ext}",
+    "asar": true,
+    "asarUnpack": [
+      "src/backend-entry.mjs"
+    ],
+    "directories": {
+      "output": "dist/release"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/harness",
+        "to": "harness",
+        "filter": [
+          "**/*",
+          "!node_modules{,/**/*}"
+        ]
+      },
+      {
+        "from": "dist/harness/node_modules",
+        "to": "harness/node_modules",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns",
+      "electronLanguages": [
+        "en",
+        "zh_CN"
+      ],
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "build/icon-master.png",
+      "electronLanguages": [
+        "en",
+        "zh_CN"
+      ],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "differentialPackage": true,
+      "oneClick": false,
+      "perMachine": false
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "veildawn",
+      "repo": "deeseek-gui",
+      "releaseType": "release"
+    }
+  },
+  "dependencies": {
+    "electron-updater": "6.8.9"
+  }
+}

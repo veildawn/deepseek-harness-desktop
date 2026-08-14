@@ -34,6 +34,16 @@ pnpm run build
 pnpm dsh web
 ```
 
+### Run as a desktop application
+
+After installing dependencies and building the checkout, launch the Electron wrapper:
+
+```sh
+pnpm desktop
+```
+
+Build a local Apple Silicon application with `pnpm desktop:pack`. Release installers use `pnpm desktop:dist:mac` on macOS and `pnpm desktop:dist:win` on Windows. See the [desktop application reference](apps/desktop/README.md) for its lifecycle, automatic updates, security model, packaging behavior, and limitations.
+
 ## Community and support
 
 - Feel free to submit feedback or bug reports through [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions).

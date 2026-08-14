@@ -34,6 +34,16 @@ pnpm run build
 pnpm dsh web
 ```
 
+### 作为桌面应用运行
+
+安装依赖并构建检出后，启动 Electron 包装应用：
+
+```sh
+pnpm desktop
+```
+
+使用 `pnpm desktop:pack` 构建本地 Apple Silicon 应用。发布安装包分别在 macOS 上使用 `pnpm desktop:dist:mac`、在 Windows 上使用 `pnpm desktop:dist:win`。生命周期、自动更新、安全模型、打包行为与限制详见[桌面应用参考](apps/desktop/README.md)。
+
 ## 社区与支持
 
 - 欢迎通过 [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions) 提交反馈或 bug 报告。
