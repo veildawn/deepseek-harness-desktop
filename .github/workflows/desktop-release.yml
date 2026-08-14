@@ -3,16 +3,12 @@ name: Desktop release
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: Desktop semantic version
-        required: true
-        default: 0.1.0-rc.6
       harness_version:
-        description: Published @deepseek-ai/dsh version to bundle
+        description: Official @deepseek-ai/dsh version; also used as the desktop app version
         required: true
         default: 0.1.0-rc.6
       release_tag:
-        description: Downstream release tag (defaults to desktop-v<version>)
+        description: Downstream release tag (defaults to desktop-v<harness-version>)
         required: false
       upstream_tag:
         description: Optional DeepSeek Harness release tag represented by this build
@@ -45,13 +41,12 @@ jobs:
           INPUT_HARNESS_VERSION: ${{ inputs.harness_version }}
           INPUT_RELEASE_TAG: ${{ inputs.release_tag }}
           INPUT_UPSTREAM_TAG: ${{ inputs.upstream_tag }}
-          INPUT_VERSION: ${{ inputs.version }}
         shell: bash
         run: |
           set -euo pipefail
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            version="$INPUT_VERSION"
             harness_version="$INPUT_HARNESS_VERSION"
+            version="$harness_version"
             upstream_tag="$INPUT_UPSTREAM_TAG"
             release_tag="${INPUT_RELEASE_TAG:-desktop-v${version}}"
           else
@@ -68,8 +63,8 @@ jobs:
           fi
 
           version_pattern='^[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$'
-          if [[ ! "$version" =~ $version_pattern || ! "$harness_version" =~ $version_pattern ]]; then
-            echo "Invalid desktop or Harness semantic version." >&2
+          if [[ ! "$harness_version" =~ $version_pattern ]]; then
+            echo "Invalid Harness semantic version." >&2
             exit 1
           fi
           if gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then

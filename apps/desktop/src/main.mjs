@@ -150,7 +150,7 @@ function installApplicationMenu(updateController) {
       label: releasesLabel,
       click: () => {
         if (updateController !== undefined) void updateController.openRelease()
-        else void shell.openExternal('https://github.com/veildawn/deeseek-gui/releases/latest')
+        else void shell.openExternal('https://github.com/veildawn/deepseek-harness-desktop/releases/latest')
       },
     },
   ]

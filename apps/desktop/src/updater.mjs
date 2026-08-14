@@ -1,4 +1,4 @@
-export const RELEASES_URL = 'https://github.com/veildawn/deeseek-gui/releases/latest'
+export const RELEASES_URL = 'https://github.com/veildawn/deepseek-harness-desktop/releases/latest'
 export const UPDATE_CHECK_DELAY_MS = 10_000
 export const UPDATE_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1_000
 

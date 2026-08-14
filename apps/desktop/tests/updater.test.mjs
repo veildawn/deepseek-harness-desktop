@@ -36,7 +36,7 @@ test('update controller checks, downloads, and installs a GitHub release', async
   updater.emit('update-downloaded', { version: '0.1.1' })
   await new Promise(resolve => setImmediate(resolve))
 
-  assert.equal(RELEASES_URL, 'https://github.com/veildawn/deeseek-gui/releases/latest')
+  assert.equal(RELEASES_URL, 'https://github.com/veildawn/deepseek-harness-desktop/releases/latest')
   assert.equal(updater.autoDownload, false)
   assert.equal(updater.autoInstallOnAppQuit, true)
   assert.equal(updater.disableDifferentialDownload, false)

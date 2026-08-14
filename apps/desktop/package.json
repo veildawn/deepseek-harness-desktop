@@ -6,8 +6,8 @@
   "type": "module",
   "main": "src/main.mjs",
   "author": "veildawn",
-  "homepage": "https://github.com/veildawn/deeseek-gui",
-  "repository": "github:veildawn/deeseek-gui",
+  "homepage": "https://github.com/veildawn/deepseek-harness-desktop",
+  "repository": "github:veildawn/deepseek-harness-desktop",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
@@ -93,7 +93,7 @@
     "publish": {
       "provider": "github",
       "owner": "veildawn",
-      "repo": "deeseek-gui",
+      "repo": "deepseek-harness-desktop",
       "releaseType": "release"
     }
   },

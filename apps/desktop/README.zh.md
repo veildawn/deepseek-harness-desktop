@@ -44,7 +44,7 @@ pnpm desktop:dist:win
 
 ## 更新与发布
 
-打包后的应用会在启动十秒后检查公开的 `veildawn/deeseek-gui` GitHub Releases，并每六小时再次检查。原生应用菜单同时提供**检查更新…**与 **GitHub 发布页**命令。发现新版后，由用户确认下载，并可重启完成安装。Electron Updater 会校验发布的 SHA-512 元数据，在 Windows 与 macOS 上优先使用基于 blockmap 的差分下载；没有旧安装包或可用 blockmap 时回退到完整安装包。
+打包后的应用会在启动十秒后检查公开的 `veildawn/deepseek-harness-desktop` GitHub Releases，并每六小时再次检查。原生应用菜单同时提供**检查更新…**与 **GitHub 发布页**命令。发现新版后，由用户确认下载，并可重启完成安装。Electron Updater 会校验发布的 SHA-512 元数据，在 Windows 与 macOS 上优先使用基于 blockmap 的差分下载；没有旧安装包或可用 blockmap 时回退到完整安装包。
 
 `Desktop release` GitHub Actions 工作流会构建 Windows x64 与 macOS arm64 产物，发布更新元数据与 SHA-256 校验和，并每六小时轮询官方 `deepseek-ai/deepseek-harness` Release。每个官方新版本都会映射到对应的已发布 `@deepseek-ai/dsh` 版本，并生成一个下游桌面 Release。手动触发可用于首次构建与故障恢复。macOS 自动安装要求应用始终使用一致的签名；工作流支持 Apple 签名与公证 secrets，未签名构建则引导用户前往发布页下载。
 
