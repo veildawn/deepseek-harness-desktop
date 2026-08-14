@@ -23,8 +23,7 @@ test('pruneHarnessRuntime keeps rebuilt PTY artifacts and removes build-only fil
       mkdir(packageLib, { recursive: true }),
     ])
     await Promise.all([
-      writeFile(join(release, 'pty.node'), ''),
-      writeFile(join(release, 'spawn-helper'), ''),
+      ...requiredPtyArtifacts(process.platform).map(artifact => writeFile(join(release, artifact), '')),
       writeFile(join(prebuilds, 'pty.node'), ''),
       writeFile(join(packageLib, 'index.js'), ''),
       writeFile(join(packageLib, 'index.js.map'), ''),

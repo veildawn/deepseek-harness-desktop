@@ -129,7 +129,15 @@ jobs:
       - name: Test desktop host
         run: pnpm --filter @deepseek-ai/dsh-desktop test
       - name: Build release
-        run: pnpm --filter @deepseek-ai/dsh-desktop ${{ matrix.command }}
+        shell: bash
+        run: |
+          if [[ -z "${CSC_LINK:-}" ]]; then
+            unset CSC_LINK CSC_KEY_PASSWORD
+          fi
+          if [[ -z "${APPLE_ID:-}" ]]; then
+            unset APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID
+          fi
+          pnpm --filter @deepseek-ai/dsh-desktop ${{ matrix.command }}
       - name: Verify updater metadata
         shell: bash
         run: |
