@@ -32,8 +32,7 @@ test('pruneHarnessRuntime keeps rebuilt PTY artifacts and removes build-only fil
     await pruneHarnessRuntime(root)
 
     await Promise.all([
-      access(join(release, 'pty.node')),
-      access(join(release, 'spawn-helper')),
+      ...requiredPtyArtifacts(process.platform).map(artifact => access(join(release, artifact))),
       access(join(packageLib, 'index.js')),
     ])
     await assert.rejects(access(join(modules, 'node-pty', 'prebuilds')))
